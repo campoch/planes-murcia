@@ -19,7 +19,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Hecho",
-   "urlMapa": "https://maps.app.goo.gl/r6na2pW2VDMWGCib6"
+   "urlMapa": "https://maps.app.goo.gl/r6na2pW2VDMWGCib6",
+   "edadConfirmada": true
   },
   {
    "nombre": "Museo del Agua y la Ciencia / Planetario",
@@ -35,7 +36,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Hecho",
-   "urlMapa": "https://maps.app.goo.gl/bx6msPwD5xefcmQF7"
+   "urlMapa": "https://maps.app.goo.gl/bx6msPwD5xefcmQF7",
+   "edadConfirmada": true
   },
   {
    "nombre": "Los Juncos Drilopark",
@@ -51,7 +53,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Hecho",
-   "urlMapa": "https://maps.app.goo.gl/G71QHiV4BbZUoQUc7"
+   "urlMapa": "https://maps.app.goo.gl/G71QHiV4BbZUoQUc7",
+   "edadConfirmada": true
   },
   {
    "nombre": "El Parque Drilo",
@@ -67,7 +70,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Hecho",
-   "urlMapa": "https://maps.app.goo.gl/HVK3peW5baQs4Q8n8"
+   "urlMapa": "https://maps.app.goo.gl/HVK3peW5baQs4Q8n8",
+   "edadConfirmada": true
   },
   {
    "nombre": "Parque del Acueducto",
@@ -83,7 +87,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Hecho",
-   "urlMapa": "https://maps.app.goo.gl/KWbcEyaU8PVJntqi8"
+   "urlMapa": "https://maps.app.goo.gl/KWbcEyaU8PVJntqi8",
+   "edadConfirmada": true
   },
   {
    "nombre": "La Granja de Hugo’s Farm",
@@ -99,7 +104,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Hecho",
-   "urlMapa": "https://maps.app.goo.gl/SXTn4JVRhb2USWiB9"
+   "urlMapa": "https://maps.app.goo.gl/SXTn4JVRhb2USWiB9",
+   "edadConfirmada": true
   },
   {
    "nombre": "La Granja de María",
@@ -115,7 +121,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Hecho",
-   "urlMapa": "https://maps.app.goo.gl/KoAr7h4Zar2ks4tU6"
+   "urlMapa": "https://maps.app.goo.gl/KoAr7h4Zar2ks4tU6",
+   "edadConfirmada": true
   },
   {
    "nombre": "Terra Natura Murcia",
@@ -132,7 +139,8 @@
    "descripcion": "Zoo y parque acuático. Entradas a la venta hasta el 31/12/2026.",
    "estado": "Hecho",
    "urlMapa": "https://maps.app.goo.gl/Ry717tVQhcg1z1CLA",
-   "urlEntradas": "https://www.elcorteingles.es/entradas/en-familia/murcia/parques-tematicos/"
+   "urlEntradas": "https://www.elcorteingles.es/entradas/en-familia/murcia/parques-tematicos/",
+   "edadConfirmada": true
   },
   {
    "nombre": "Fundación Centauro Quirón",
@@ -148,7 +156,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Hecho",
-   "urlMapa": "https://maps.app.goo.gl/SzLL5PE2sae617nV6"
+   "urlMapa": "https://maps.app.goo.gl/SzLL5PE2sae617nV6",
+   "edadConfirmada": true
   },
   {
    "nombre": "Star Jump Park",
@@ -164,7 +173,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Hecho",
-   "urlMapa": "https://maps.app.goo.gl/qkWYvMCeCrGBLe8L8"
+   "urlMapa": "https://maps.app.goo.gl/qkWYvMCeCrGBLe8L8",
+   "edadConfirmada": true
   },
   {
    "nombre": "X Jump",
@@ -180,7 +190,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Hecho",
-   "urlMapa": "https://maps.app.goo.gl/4RDEgZqDkBG8ekp87"
+   "urlMapa": "https://maps.app.goo.gl/4RDEgZqDkBG8ekp87",
+   "edadConfirmada": true
   },
   {
    "nombre": "Dino Park",
@@ -196,7 +207,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Hecho",
-   "urlMapa": "https://maps.app.goo.gl/zYGdqHx1sqwp5Dxr5"
+   "urlMapa": "https://maps.app.goo.gl/zYGdqHx1sqwp5Dxr5",
+   "edadConfirmada": true
   },
   {
    "nombre": "Biblioteca Regional de la Región de Murcia",
@@ -212,7 +224,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Pendiente",
-   "urlMapa": "https://maps.app.goo.gl/YXiA5UTSseZG1URE7"
+   "urlMapa": "https://maps.app.goo.gl/YXiA5UTSseZG1URE7",
+   "edadConfirmada": true
   },
   {
    "nombre": "Centro de Recuperación de Fauna Silvestre",
@@ -228,7 +241,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Pendiente",
-   "urlMapa": "https://g.co/kgs/Eg3afHB"
+   "urlMapa": "https://g.co/kgs/Eg3afHB",
+   "edadConfirmada": true
   },
   {
    "nombre": "La Fábrica de Arte (Neon Party)",
@@ -244,7 +258,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Pendiente",
-   "urlMapa": "https://maps.app.goo.gl/gXRcqyEz9DxhPoft6"
+   "urlMapa": "https://maps.app.goo.gl/gXRcqyEz9DxhPoft6",
+   "edadConfirmada": true
   },
   {
    "nombre": "Cuevas de sal SalRoomMurcia (haloterapia)",
@@ -260,7 +275,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Pendiente",
-   "urlMapa": "https://maps.app.goo.gl/fC4TnEvhXdPsam91A"
+   "urlMapa": "https://maps.app.goo.gl/fC4TnEvhXdPsam91A",
+   "edadConfirmada": true
   },
   {
    "nombre": "La Isla Parque Infantil",
@@ -276,7 +292,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Pendiente",
-   "urlMapa": "https://maps.app.goo.gl/kCUtxqWh7Voh3tGB9"
+   "urlMapa": "https://maps.app.goo.gl/kCUtxqWh7Voh3tGB9",
+   "edadConfirmada": true
   },
   {
    "nombre": "Safari Aitana",
@@ -292,7 +309,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Pendiente",
-   "urlMapa": "https://maps.app.goo.gl/sYjDLedyKc21Aerb6"
+   "urlMapa": "https://maps.app.goo.gl/sYjDLedyKc21Aerb6",
+   "edadConfirmada": true
   },
   {
    "nombre": "Río Safari Elche",
@@ -308,7 +326,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Pendiente",
-   "urlMapa": "https://maps.app.goo.gl/FzoX1bQVCY3rqi7V6"
+   "urlMapa": "https://maps.app.goo.gl/FzoX1bQVCY3rqi7V6",
+   "edadConfirmada": true
   },
   {
    "nombre": "Finca, quesería y granja La Yerbera",
@@ -324,7 +343,8 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Pendiente",
-   "urlMapa": "https://maps.app.goo.gl/qHQcoWToycw5tz4k8"
+   "urlMapa": "https://maps.app.goo.gl/qHQcoWToycw5tz4k8",
+   "edadConfirmada": true
   },
   {
    "nombre": "Proyecto Burruticas",
@@ -340,14 +360,69 @@
    "esPermanente": true,
    "descripcion": "Lugar fijo de tu lista. Mira horarios y precios antes de ir.",
    "estado": "Pendiente",
-   "urlMapa": "https://maps.app.goo.gl/Pjx9EgAr4Y3Hxo1Q6"
+   "urlMapa": "https://maps.app.goo.gl/Pjx9EgAr4Y3Hxo1Q6",
+   "edadConfirmada": true
+  },
+  {
+   "nombre": "Fuentes del Marqués (manantiales y ardillas)",
+   "hora": "Consultar",
+   "tipo": "Naturaleza/Granja",
+   "lugar": "Fuentes del Marqués",
+   "municipio": "Caravaca de la Cruz",
+   "precio": "Gratis",
+   "urlEntradas": "",
+   "urlInfo": "https://planenfamilia.com/murcia/planes-para-2-anos",
+   "edadMin": 0,
+   "edadMax": 99,
+   "esPermanente": true,
+   "descripcion": "Manantiales con patos y ardillas, merenderos y el Torreón de los Templarios. Recorrido llano apto para carrito, indicado para todas las edades.",
+   "estado": "Pendiente",
+   "fecha": "Cualquier finde",
+   "esFinde": true,
+   "edadConfirmada": false
+  },
+  {
+   "nombre": "Jardín del Salitre (parque de la Pólvora)",
+   "hora": "Consultar",
+   "tipo": "Parque/Infantil",
+   "lugar": "Jardín del Salitre",
+   "municipio": "Murcia capital",
+   "precio": "Gratis",
+   "urlEntradas": "",
+   "urlInfo": "https://planenfamilia.com/murcia/planes-para-2-anos",
+   "edadMin": 0,
+   "edadMax": 99,
+   "esPermanente": true,
+   "descripcion": "Parque urbano gratuito con lago de patos, juego con forma de mariposa gigante y zona de arena y agua. Aparece en una guía de planes para niños de 2 años.",
+   "estado": "Pendiente",
+   "fecha": "Cualquier finde",
+   "esFinde": true,
+   "edadConfirmada": false
+  },
+  {
+   "nombre": "Wonderland Murcia (parque infantil cubierto)",
+   "hora": "Consultar",
+   "tipo": "Parque/Infantil",
+   "lugar": "Wonderland Murcia",
+   "municipio": "Murcia capital",
+   "precio": "Desde 2€",
+   "urlEntradas": "",
+   "urlInfo": "https://planenfamilia.com/murcia/planes-para-2-anos",
+   "edadMin": 1,
+   "edadMax": 10,
+   "esPermanente": true,
+   "descripcion": "Espacio de juego cubierto para niños de 1 a 10 años, con talleres de cocina, disfraces y zona para bebés. Es un plan para días de lluvia; el horario no está confirmado.",
+   "estado": "Pendiente",
+   "fecha": "Cualquier finde",
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "Exposición Titeremurcia, 25 años de historia",
    "hora": "10:00-20:00",
    "tipo": "Exposición",
    "lugar": "Museo de la Ciudad",
-   "municipio": "Murcia",
+   "municipio": "Murcia capital",
    "precio": "Consultar",
    "urlEntradas": "",
    "urlInfo": "https://www.agendamenuda.es/",
@@ -359,7 +434,8 @@
    "fechaISO": "2026-11-04",
    "fechaFinISO": "2026-11-15",
    "fecha": "04/11/2026 al 15/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "La Huertana 2026 (talleres infantiles gratuitos el domingo)",
@@ -378,14 +454,15 @@
    "fechaISO": "2026-11-06",
    "fechaFinISO": "2026-11-08",
    "fecha": "06/11/2026 al 08/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "La ratita presumida (Titeremurcia)",
    "hora": "12:00",
    "tipo": "Teatro/Musical",
    "lugar": "Jardín del Centro Cultural de La Arboleja",
-   "municipio": "Murcia",
+   "municipio": "Murcia capital",
    "precio": "Gratis",
    "urlEntradas": "",
    "urlInfo": "https://www.titeremurcia.com/",
@@ -397,14 +474,15 @@
    "fechaISO": "2026-11-07",
    "fechaFinISO": "2026-11-07",
    "fecha": "07/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "Pequemagia y Magia en Familia",
    "hora": "Consultar",
    "tipo": "Magia/Circo",
    "lugar": "La Caverna del Brujo",
-   "municipio": "Murcia",
+   "municipio": "Murcia capital",
    "precio": "Consultar",
    "urlEntradas": "",
    "urlInfo": "https://www.murcianoticias.es/sociedad/planes-con-ninos-en-murcia-halloween-en-terra-natura-titeremurcia-y-teatro-infantil-para-las-proximas-semanas/",
@@ -416,14 +494,15 @@
    "fechaISO": "2026-11-07",
    "fechaFinISO": "2026-11-07",
    "fecha": "07/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "Rum-Rum, Trasto-Karts!!! (Titeremurcia)",
    "hora": "12:00",
    "tipo": "Teatro/Musical",
    "lugar": "Gran Vía Alfonso X el Sabio",
-   "municipio": "Murcia",
+   "municipio": "Murcia capital",
    "precio": "Gratis",
    "urlEntradas": "",
    "urlInfo": "https://www.titeremurcia.com/",
@@ -435,14 +514,15 @@
    "fechaISO": "2026-11-07",
    "fechaFinISO": "2026-11-07",
    "fecha": "07/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "Bunji, la pequeña koala",
    "hora": "12:00",
    "tipo": "Teatro/Musical",
    "lugar": "Teatro Romea",
-   "municipio": "Murcia",
+   "municipio": "Murcia capital",
    "precio": "6€",
    "urlEntradas": "https://compralaentrada.com/event/bunji-la-pequena-koala-murcia-2026-2",
    "urlInfo": "https://www.teatroromea.es/Evento.aspx?frmid=1748",
@@ -454,14 +534,15 @@
    "fechaISO": "2026-11-08",
    "fechaFinISO": "2026-11-08",
    "fecha": "08/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "Debajo del Tejado (Pupaclown)",
    "hora": "12:00",
    "tipo": "Teatro/Musical",
    "lugar": "Centro Escénico Pupaclown",
-   "municipio": "Murcia",
+   "municipio": "Murcia capital",
    "precio": "9€",
    "urlEntradas": "",
    "urlInfo": "https://pupaclown.org/",
@@ -473,7 +554,30 @@
    "fechaISO": "2026-11-08",
    "fechaFinISO": "2026-11-08",
    "fecha": "08/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
+  },
+  {
+   "nombre": "Las maravillas de Oriente (Titeremurcia)",
+   "hora": "13:00",
+   "tipo": "Teatro/Musical",
+   "lugar": "Plaza Julián Romea",
+   "municipio": "Murcia capital",
+   "precio": "Gratis",
+   "urlEntradas": "",
+   "urlInfo": "https://www.titeremurcia.com/",
+   "edadMin": 0,
+   "edadMax": 99,
+   "edadConfirmada": false,
+   "esPermanente": false,
+   "descripcion": "Función de calle del festival de títeres. La fuente no indica la edad recomendada.",
+   "estado": "Pendiente",
+   "fechaISO": "2026-11-08",
+   "fechaFinISO": "2026-11-08",
+   "fecha": "08/11/2026",
+   "esFinde": true,
+   "manual": true,
+   "enriquecido": "2026-11-07"
   },
   {
    "nombre": "Mercado de Artesanía especial protectoras animales",
@@ -492,14 +596,15 @@
    "fechaISO": "2026-11-08",
    "fechaFinISO": "2026-11-08",
    "fecha": "08/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "Monstruo pequeño (Vertebrado Bixas)",
    "hora": "18:00",
    "tipo": "Teatro/Musical",
    "lugar": "La Luz de la Verbena (Era Alta)",
-   "municipio": "Murcia",
+   "municipio": "Murcia capital",
    "precio": "Consultar",
    "urlEntradas": "",
    "urlInfo": "https://www.titeremurcia.com/",
@@ -511,7 +616,8 @@
    "fechaISO": "2026-11-08",
    "fechaFinISO": "2026-11-08",
    "fecha": "08/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "Pedro y el lobo (El Hechizo Teatro)",
@@ -530,7 +636,30 @@
    "fechaISO": "2026-11-08",
    "fechaFinISO": "2026-11-08",
    "fecha": "08/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
+  },
+  {
+   "nombre": "Punta, de El ball de Sant Vito (Titeremurcia)",
+   "hora": "18:00",
+   "tipo": "Teatro/Musical",
+   "lugar": "Auditorio Municipal de Cabezo de Torres",
+   "municipio": "Murcia capital",
+   "precio": "5€",
+   "urlEntradas": "",
+   "urlInfo": "https://www.titeremurcia.com/",
+   "edadMin": 0,
+   "edadMax": 99,
+   "edadConfirmada": false,
+   "esPermanente": false,
+   "descripcion": "Función del festival de títeres. La fuente no indica la edad recomendada.",
+   "estado": "Pendiente",
+   "fechaISO": "2026-11-08",
+   "fechaFinISO": "2026-11-08",
+   "fecha": "08/11/2026",
+   "esFinde": true,
+   "manual": true,
+   "enriquecido": "2026-11-07"
   },
   {
    "nombre": "El patio de mi casa (musical infantil)",
@@ -549,7 +678,30 @@
    "fechaISO": "2026-11-11",
    "fechaFinISO": "2026-11-11",
    "fecha": "11/11/2026",
-   "esFinde": false
+   "esFinde": false,
+   "edadConfirmada": false
+  },
+  {
+   "nombre": "Taller de creación de títeres de guante (Titeremurcia)",
+   "hora": "17:00",
+   "tipo": "Taller",
+   "lugar": "Centro Cultural de Cobatillas",
+   "municipio": "Murcia capital",
+   "precio": "Gratis",
+   "urlEntradas": "",
+   "urlInfo": "https://www.titeremurcia.com/",
+   "edadMin": 0,
+   "edadMax": 99,
+   "edadConfirmada": false,
+   "esPermanente": false,
+   "descripcion": "Taller del festival de títeres. La fuente no indica la edad recomendada.",
+   "estado": "Pendiente",
+   "fechaISO": "2026-11-12",
+   "fechaFinISO": "2026-11-12",
+   "fecha": "12/11/2026",
+   "esFinde": false,
+   "manual": true,
+   "enriquecido": "2026-11-07"
   },
   {
    "nombre": "Fiestas del Milagro de Bolnuevo 2026",
@@ -568,7 +720,8 @@
    "fechaISO": "2026-11-13",
    "fechaFinISO": "2026-11-22",
    "fecha": "13/11/2026 al 22/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "Mercado Medieval de Totana",
@@ -587,14 +740,37 @@
    "fechaISO": "2026-11-13",
    "fechaFinISO": "2026-11-15",
    "fecha": "13/11/2026 al 15/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
+  },
+  {
+   "nombre": "Ratós, el tejido del tiempo (Titeremurcia)",
+   "hora": "18:30",
+   "tipo": "Teatro/Musical",
+   "lugar": "Centro Municipal de Jerónimo y Avileses",
+   "municipio": "Murcia capital",
+   "precio": "Gratis",
+   "urlEntradas": "",
+   "urlInfo": "https://www.titeremurcia.com/",
+   "edadMin": 0,
+   "edadMax": 99,
+   "edadConfirmada": false,
+   "esPermanente": false,
+   "descripcion": "Función de El Baúl de la Fantasía dentro del festival de títeres.",
+   "estado": "Pendiente",
+   "fechaISO": "2026-11-13",
+   "fechaFinISO": "2026-11-13",
+   "fecha": "13/11/2026",
+   "esFinde": false,
+   "manual": true,
+   "enriquecido": "2026-11-07"
   },
   {
    "nombre": "En el viento (libros con alas) – Beniaján",
    "hora": "18:00",
    "tipo": "Teatro/Musical",
    "lugar": "Auditorio Municipal de Beniaján",
-   "municipio": "Murcia",
+   "municipio": "Murcia capital",
    "precio": "5€",
    "urlEntradas": "",
    "urlInfo": "https://www.laguiago.com/murcia/titeremurcia-2026-programacion/",
@@ -606,14 +782,38 @@
    "fechaISO": "2026-11-14",
    "fechaFinISO": "2026-11-14",
    "fecha": "14/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
+  },
+  {
+   "nombre": "Plenilunio, para bebés (Titeremurcia)",
+   "hora": "17:30 y 18:30",
+   "tipo": "Teatro/Musical",
+   "lugar": "Salón de Plenos del Ayuntamiento",
+   "municipio": "Los Alcázares",
+   "precio": "Consultar",
+   "urlEntradas": "",
+   "urlInfo": "https://www.titeremurcia.com/",
+   "edadMin": 0,
+   "edadMax": 99,
+   "edadConfirmada": true,
+   "esPermanente": false,
+   "descripcion": "Función pensada para bebés según la web del festival. Precio no confirmado.",
+   "estado": "Pendiente",
+   "edadTexto": "Pensada para bebés",
+   "fechaISO": "2026-11-14",
+   "fechaFinISO": "2026-11-14",
+   "fecha": "14/11/2026",
+   "esFinde": true,
+   "manual": true,
+   "enriquecido": "2026-11-07"
   },
   {
    "nombre": "Bambi (títeres y actriz)",
    "hora": "12:00",
    "tipo": "Teatro/Musical",
    "lugar": "Centro Escénico Pupaclown",
-   "municipio": "Murcia",
+   "municipio": "Murcia capital",
    "precio": "9€",
    "urlEntradas": "",
    "urlInfo": "https://pupaclown.org/",
@@ -625,7 +825,30 @@
    "fechaISO": "2026-11-15",
    "fechaFinISO": "2026-11-15",
    "fecha": "15/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
+  },
+  {
+   "nombre": "Beee! (Titeremurcia)",
+   "hora": "12:00",
+   "tipo": "Teatro/Musical",
+   "lugar": "Teatro Geli Albaladejo",
+   "municipio": "San Pedro del Pinatar",
+   "precio": "3€",
+   "urlEntradas": "",
+   "urlInfo": "https://www.titeremurcia.com/",
+   "edadMin": 0,
+   "edadMax": 99,
+   "edadConfirmada": false,
+   "esPermanente": false,
+   "descripcion": "Títeres y actores, de la compañía DeLiRi. Entradas en la web del municipio y en la del festival.",
+   "estado": "Pendiente",
+   "fechaISO": "2026-11-15",
+   "fechaFinISO": "2026-11-15",
+   "fecha": "15/11/2026",
+   "esFinde": true,
+   "manual": true,
+   "enriquecido": "2026-11-07"
   },
   {
    "nombre": "En el viento (libros con alas) – Santomera",
@@ -644,7 +867,8 @@
    "fechaISO": "2026-11-15",
    "fechaFinISO": "2026-11-15",
    "fecha": "15/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "Cuentacuentos 'El bosque encantado' con Elena Serrano",
@@ -663,7 +887,8 @@
    "fechaISO": "2026-11-19",
    "fechaFinISO": "2026-11-20",
    "fecha": "19/11/2026 al 20/11/2026",
-   "esFinde": false
+   "esFinde": false,
+   "edadConfirmada": false
   },
   {
    "nombre": "Mercado Medieval de Cartagena",
@@ -682,7 +907,8 @@
    "fechaISO": "2026-11-20",
    "fechaFinISO": "2026-11-22",
    "fecha": "20/11/2026 al 22/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "El Ladrón de Arabia (tributo a Aladdín)",
@@ -701,7 +927,8 @@
    "fechaISO": "2026-11-21",
    "fechaFinISO": "2026-11-21",
    "fecha": "21/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "Mercadillo Artesanal de Puerto de Mazarrón",
@@ -720,14 +947,15 @@
    "fechaISO": "2026-11-21",
    "fechaFinISO": "2026-11-21",
    "fecha": "21/11/2026",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   },
   {
    "nombre": "Sé tortuga (títeres y actores)",
    "hora": "18:00",
    "tipo": "Teatro/Musical",
    "lugar": "Centro Escénico Pupaclown",
-   "municipio": "Murcia",
+   "municipio": "Murcia capital",
    "precio": "9€",
    "urlEntradas": "",
    "urlInfo": "https://pupaclown.org/",
@@ -739,58 +967,8 @@
    "fechaISO": "2026-11-21",
    "fechaFinISO": "2026-11-21",
    "fecha": "21/11/2026",
-   "esFinde": true
-  },
-  {
-   "nombre": "Fuentes del Marqués (manantiales y ardillas)",
-   "hora": "Consultar",
-   "tipo": "Naturaleza/Granja",
-   "lugar": "Fuentes del Marqués",
-   "municipio": "Caravaca de la Cruz",
-   "precio": "Gratis",
-   "urlEntradas": "",
-   "urlInfo": "https://planenfamilia.com/murcia/planes-para-2-anos",
-   "edadMin": 0,
-   "edadMax": 99,
-   "esPermanente": true,
-   "descripcion": "Manantiales con patos y ardillas, merenderos y el Torreón de los Templarios. Recorrido llano apto para carrito, indicado para todas las edades.",
-   "estado": "Pendiente",
-   "fecha": "Cualquier finde",
-   "esFinde": true
-  },
-  {
-   "nombre": "Jardín del Salitre (parque de la Pólvora)",
-   "hora": "Consultar",
-   "tipo": "Parque/Infantil",
-   "lugar": "Jardín del Salitre",
-   "municipio": "Murcia",
-   "precio": "Gratis",
-   "urlEntradas": "",
-   "urlInfo": "https://planenfamilia.com/murcia/planes-para-2-anos",
-   "edadMin": 0,
-   "edadMax": 99,
-   "esPermanente": true,
-   "descripcion": "Parque urbano gratuito con lago de patos, juego con forma de mariposa gigante y zona de arena y agua. Aparece en una guía de planes para niños de 2 años.",
-   "estado": "Pendiente",
-   "fecha": "Cualquier finde",
-   "esFinde": true
-  },
-  {
-   "nombre": "Wonderland Murcia (parque infantil cubierto)",
-   "hora": "Consultar",
-   "tipo": "Parque/Infantil",
-   "lugar": "Wonderland Murcia",
-   "municipio": "Murcia",
-   "precio": "Desde 2€",
-   "urlEntradas": "",
-   "urlInfo": "https://planenfamilia.com/murcia/planes-para-2-anos",
-   "edadMin": 1,
-   "edadMax": 10,
-   "esPermanente": true,
-   "descripcion": "Espacio de juego cubierto para niños de 1 a 10 años, con talleres de cocina, disfraces y zona para bebés. Es un plan para días de lluvia; el horario no está confirmado.",
-   "estado": "Pendiente",
-   "fecha": "Cualquier finde",
-   "esFinde": true
+   "esFinde": true,
+   "edadConfirmada": false
   }
  ]
 }

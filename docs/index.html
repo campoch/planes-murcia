@@ -132,7 +132,9 @@ a.btn { text-decoration: none; }
   border: 1px solid var(--border-strong); background: var(--bg); color: var(--text); font-size: 16px;
 }
 .field::placeholder { color: var(--muted); opacity: 1; }
-.panel-foot { display: flex; justify-content: flex-end; margin-top: 12px; }
+.panel-foot { display: flex; gap: 8px; justify-content: space-between; margin-top: 12px; }
+.panel-foot .btn-primary { flex: 1; }
+#resultsHeader { scroll-margin-top: 76px; }
 
 /* CHIPS */
 .chips-row {
@@ -269,6 +271,17 @@ tbody tr:last-child td { border-bottom: 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+dialog { border: 1px solid var(--border-strong); border-radius: 16px; background: var(--surface); color: var(--text); padding: 20px; width: min(92vw, 460px); max-height: 90vh; overflow: auto; margin: auto; }
+dialog::backdrop { background: rgba(0,0,0,.5); }
+dialog h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; }
+dialog p, dialog li { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+dialog li strong { color: var(--text); font-weight: 600; }
+dialog ol { padding-left: 20px; margin: 8px 0 12px; }
+.tok-aviso { color: var(--text); background: var(--surface2); border-radius: 10px; padding: 8px 10px; }
+.tok-error { color: var(--accent); min-height: 1.3em; font-size: 13px; }
+.tok-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
+.pie { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; flex-direction: column; align-items: flex-start; gap: 8px; color: var(--muted); font-size: 13px; }
+.pie[hidden] { display: none; }
 </style>
 </head>
 <body>
@@ -301,7 +314,6 @@ tbody tr:last-child td { border-bottom: 0; }
       </div>
     </div>
     <div class="actions">
-      <a class="btn btn-primary" id="btnBuscar" href="https://github.com/campoch/planes-murcia/actions/workflows/semanal.yml" target="_blank" rel="noopener noreferrer" title="Abre GitHub: pulsa Run workflow para buscar planes nuevos" aria-label="Buscar planes nuevos (abre GitHub)"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg><span>Buscar</span></a>
       <button type="button" class="btn btn-quiet" id="btnExcel" onclick="exportarExcel()" disabled aria-label="Exportar a Excel">
         <svg class="i" aria-hidden="true"><use href="#i-download"/></svg><span class="lbl">Excel</span>
       </button>
@@ -353,14 +365,14 @@ tbody tr:last-child td { border-bottom: 0; }
         </select>
       </div>
       <div class="filter-group">
-        <label class="filter-label" for="fEdad">Edad mínima</label>
+        <label class="filter-label" for="fEdad">Edad del niño</label>
         <select class="field" id="fEdad" onchange="aplicarFiltros()">
           <option value="">Cualquier edad</option>
-          <option value="0">Desde bebés</option>
-          <option value="1">1 año o más</option>
-          <option value="2">2 años o más</option>
-          <option value="3">3 años o más</option>
-          <option value="4">4 años o más</option>
+          <option value="0">Bebé (menos de 1)</option>
+          <option value="1">1 año</option>
+          <option value="2">2 años</option>
+          <option value="3">3 años</option>
+          <option value="4">4 años</option>
         </select>
       </div>
       <div class="filter-group">
@@ -385,8 +397,10 @@ tbody tr:last-child td { border-bottom: 0; }
         <input class="field" id="fTexto" type="search" placeholder="Nombre o lugar" autocomplete="off" oninput="aplicarFiltros()" />
       </div>
     </div>
+    <p class="small muted" style="margin-top:10px">Los planes con edad no indicada se muestran siempre, marcados como tal.</p>
     <div class="panel-foot">
-      <button type="button" class="btn btn-quiet" onclick="limpiarFiltros()">Restablecer filtros</button>
+      <button type="button" class="btn btn-quiet" onclick="limpiarFiltros()">Restablecer</button>
+      <button type="button" class="btn btn-primary" id="btnVer" onclick="verResultados()">Ver planes</button>
     </div>
   </section>
 
@@ -424,7 +438,30 @@ tbody tr:last-child td { border-bottom: 0; }
       <p>Un momento.</p>
           </div>
   </div>
+  <footer class="pie" id="pieAdmin" hidden>
+    <button type="button" class="btn btn-quiet" id="btnActualizar" onclick="buscarAhora()"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg><span>Actualizar planes</span></button>
+    <p>Busca planes nuevos en internet. Tarda de 2 a 4 minutos y gasta unos 1–2 $ de tu saldo de API.</p>
+  </footer>
 </main>
+
+<dialog id="dlgToken" aria-labelledby="tokTitulo">
+  <h2 id="tokTitulo">Permiso para buscar desde aquí</h2>
+  <p class="tok-aviso" id="tokAviso" hidden></p>
+  <p>Solo una vez. GitHub te da un código que vale únicamente para este repositorio y solo para lanzar la búsqueda. Se guarda solo en este navegador.</p>
+  <ol>
+    <li><a class="link-info" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">Abre GitHub y crea el código</a></li>
+    <li>Nombre: <strong>planes-murcia</strong>. Caducidad: la más larga. <strong>Repository access → Only select repositories → planes-murcia</strong>.</li>
+    <li><strong>Permissions → Repository permissions → Actions → Read and write</strong>. Pulsa <strong>Generate token</strong> y copia el código.</li>
+    <li>Pégalo aquí:</li>
+  </ol>
+  <input class="field" id="tokInput" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…" />
+  <p class="tok-error" id="tokError" role="alert"></p>
+  <div class="tok-actions">
+    <button type="button" class="btn btn-quiet" onclick="document.getElementById('dlgToken').close()">Cancelar</button>
+    <button type="button" class="btn btn-primary" onclick="guardarYBuscar()">Guardar y buscar</button>
+  </div>
+</dialog>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
@@ -502,7 +539,16 @@ function contarFiltros() {
 function aplicarFiltros() {
   contarFiltros();
   if (!allPlanes.length) return;
-  renderResults(getFiltered());
+  const lista = getFiltered();
+  const bv = document.getElementById('btnVer');
+  if (bv) bv.textContent = lista.length === 1 ? 'Ver 1 plan' : `Ver ${lista.length} planes`;
+  renderResults(lista);
+}
+
+function verResultados() {
+  document.getElementById('filtersPanel').classList.remove('open');
+  document.getElementById('btnFiltros').setAttribute('aria-expanded', 'false');
+  document.getElementById('resultsHeader').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function toggleChip(id, cls, el) {
@@ -578,6 +624,8 @@ function badgeEstado(p) {
   return '<span class="badge">Pendiente</span>';
 }
 function edadStr(p) {
+  if (p.edadTexto) return p.edadTexto;
+  if (!p.edadConfirmada) return 'Edad no indicada';
   if (p.edadMin === 0 && p.edadMax >= 99) return 'Todas las edades';
   if (p.edadMax >= 99) return `${p.edadMin}+ años`;
   return `${p.edadMin}–${p.edadMax} años`;
@@ -643,7 +691,7 @@ function getFiltered() {
   const fTxt = document.getElementById('fTexto').value.toLowerCase();
   if (fLoc) pl = pl.filter(p => p.municipio === fLoc);
   if (fTema && tipoMap[fTema]) { const w=tipoMap[fTema]; pl=pl.filter(p=>p.tipo&&w.some(x=>p.tipo.toLowerCase().includes(x))); }
-  if (fEdad!=='') pl=pl.filter(p=>p.edadMin<=parseInt(fEdad)+1);
+  if (fEdad!=='') { const e = parseInt(fEdad); pl = pl.filter(p => !p.edadConfirmada || (p.edadMin <= e && e <= p.edadMax)); }
   if (fPrecio==='gratis') pl=pl.filter(p=>p.precio&&p.precio.toLowerCase().includes('grat'));
   else if (fPrecio==='pago') pl=pl.filter(p=>!p.precio||!p.precio.toLowerCase().includes('grat'));
   if (fFecha==='evento') pl=pl.filter(p=>!p.esPermanente);
@@ -652,7 +700,7 @@ function getFiltered() {
   if (fTxt) pl=pl.filter(p=>(p.nombre||'').toLowerCase().includes(fTxt)||(p.descripcion||'').toLowerCase().includes(fTxt)||(p.municipio||'').toLowerCase().includes(fTxt));
   if (activeChips.has('finde')) pl=pl.filter(p=>p.esFinde);
   if (activeChips.has('gratis')) pl=pl.filter(p=>p.precio&&p.precio.toLowerCase().includes('grat'));
-  if (activeChips.has('bebes')) pl=pl.filter(p=>p.edadMin<=1);
+  if (activeChips.has('bebes')) pl=pl.filter(p=>p.edadConfirmada && p.edadMin<=1);
   if (activeChips.has('mercado')) pl=pl.filter(p=>p.tipo&&tipoMap.mercado.some(w=>p.tipo.toLowerCase().includes(w)));
   if (activeChips.has('musica')) pl=pl.filter(p=>p.tipo&&tipoMap.musica.some(w=>p.tipo.toLowerCase().includes(w)));
   if (activeChips.has('teatro')) pl=pl.filter(p=>p.tipo&&tipoMap.teatro.some(w=>p.tipo.toLowerCase().includes(w)));
@@ -686,7 +734,7 @@ function exportarExcel() {
   const toRow = (p,i) => [
     i+1, p.nombre||'', p.fecha||'', p.hora||'', p.tipo||'',
     p.lugar||'', p.municipio||'', p.precio||'', label(p),
-    p.edadMin||0, p.edadMax===99?'Sin límite':p.edadMax||'',
+    p.edadConfirmada ? (p.edadMin||0) : 'No indicada', p.edadConfirmada ? (p.edadMax===99 ? 'Sin límite' : p.edadMax) : 'No indicada',
     p.esFinde?'SÍ':'NO', p.esPermanente?'SÍ':'NO',
     p.descripcion||'', p.estado||'Pendiente', p.fuente||''
   ];
@@ -758,7 +806,9 @@ function normalizarPlanes(arr) {
       esFinde: Boolean(p.esFinde),
       esPermanente: Boolean(p.esPermanente),
       estado: p.estado || 'Pendiente',
-      urlEntradas: p.urlEntradas || ''
+      urlEntradas: p.urlEntradas || '',
+      edadConfirmada: p.edadConfirmada === true || (!!p.esPermanente && !!p.urlMapa),
+      municipio: /^murcia( capital| ciudad)?$/i.test((p.municipio || '').trim()) ? 'Murcia capital' : (p.municipio || '')
     };
     if (q.esPermanente) { q.fechaISO = ''; q.fechaFinISO = ''; }
     else { const r = parseRango(q); q.fechaISO = r[0]; q.fechaFinISO = r[1]; }
@@ -775,39 +825,149 @@ function setRangoDefecto() {
 setRangoDefecto();
 contarFiltros();
 mqMobile.addEventListener('change', () => { if (allPlanes.length) aplicarFiltros(); });
+const REPO = 'campoch/planes-murcia';
+const WORKFLOW = 'semanal.yml';
+const API = 'https://api.github.com';
+const POLL_MS = window.__POLL_MS || 6000;
+const TOPE_MS = 12 * 60 * 1000;
+let buscando = false;
+
+function leerToken() { try { return localStorage.getItem('ghToken') || ''; } catch (e) { return ''; } }
+function guardarToken(t) { try { localStorage.setItem('ghToken', t); } catch (e) {} }
+function borrarToken() { try { localStorage.removeItem('ghToken'); } catch (e) {} }
+const esperar = ms => new Promise(r => setTimeout(r, ms));
+
+function aplicarDatos(datos) {
+  allPlanes = normalizarPlanes(datos.planes || []);
+  // Primero los eventos con fecha (por orden de fecha) y después los lugares fijos
+  allPlanes.sort((a, b) => (a.esPermanente - b.esPermanente) || (a.fechaISO || '').localeCompare(b.fechaISO || '') || a.nombre.localeCompare(b.nombre, 'es'));
+  const sel = document.getElementById('fLocalidad');
+  const actual = sel.value;
+  while (sel.options.length > 1) sel.remove(1);
+  [...new Set(allPlanes.map(p => p.municipio).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es')).forEach(m => {
+    const o = document.createElement('option'); o.textContent = m; o.value = m; sel.appendChild(o);
+  });
+  if ([...sel.options].some(o => o.value === actual)) sel.value = actual;
+  const hoy = isoDate(new Date());
+  if (datos.rango) {
+    const desde = hoy > datos.rango.desde ? hoy : datos.rango.desde;
+    document.getElementById('fDesde').value = desde;
+    document.getElementById('fHasta').value = datos.rango.hasta >= desde ? datos.rango.hasta : desde;
+  }
+  const f = new Date(datos.actualizado + 'T12:00:00');
+  const dias = Math.floor((new Date() - f) / 86400000);
+  const aviso = dias > 9 ? ` · <strong>Datos de hace ${dias} días</strong>` : '';
+  setStatus(`Actualizado el ${f.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })} · <strong>${allPlanes.length} planes</strong>${aviso}. Confirma fecha y precio antes de ir.`, dias > 9 ? 'error' : 'done');
+  document.getElementById('btnExcel').disabled = false;
+  document.getElementById('resultsHeader').style.display = 'flex';
+  aplicarFiltros();
+}
+
 async function cargar() {
   try {
     const r = await fetch('planes.json', { cache: 'no-store' });
     if (!r.ok) throw new Error('HTTP ' + r.status);
-    const datos = await r.json();
-    allPlanes = normalizarPlanes(datos.planes || []);
-    // Primero los eventos con fecha (por orden de fecha) y después los lugares fijos
-    allPlanes.sort((a, b) => (a.esPermanente - b.esPermanente) || (a.fechaISO || '').localeCompare(b.fechaISO || '') || a.nombre.localeCompare(b.nombre, 'es'));
-    // Localidades que hay en los datos
-    const sel = document.getElementById('fLocalidad');
-    [...new Set(allPlanes.map(p => p.municipio).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es')).forEach(m => {
-      const o = document.createElement('option'); o.textContent = m; o.value = m; sel.appendChild(o);
-    });
-    // Rango de fechas por defecto: de hoy al final de lo buscado
-    const hoy = isoDate(new Date());
-    if (datos.rango) {
-      const desde = hoy > datos.rango.desde ? hoy : datos.rango.desde;
-      document.getElementById('fDesde').value = desde;
-      document.getElementById('fHasta').value = datos.rango.hasta >= desde ? datos.rango.hasta : desde;
-    }
-    const f = new Date(datos.actualizado + 'T12:00:00');
-    const dias = Math.floor((new Date() - f) / 86400000);
-    const aviso = dias > 9 ? ` · <strong>Datos de hace ${dias} días</strong>` : '';
-    setStatus(`Actualizado el ${f.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })} · <strong>${allPlanes.length} planes</strong>${aviso}. Confirma fecha y precio antes de ir.`, dias > 9 ? 'error' : 'done');
-    document.getElementById('btnExcel').disabled = false;
-    document.getElementById('resultsHeader').style.display = 'flex';
-    aplicarFiltros();
+    aplicarDatos(await r.json());
   } catch (e) {
     setStatus('No se pudieron cargar los planes', 'error');
     showState('alert', 'No se pudieron cargar los planes', 'Recarga la página. Si sigue igual, puede que la primera búsqueda aún no se haya ejecutado.', 'Reintentar', 'cargar()');
   }
 }
+
+// ---- Buscar desde la web: lanza la tarea de GitHub, espera y recoge los planes nuevos ----
+async function gh(url, cab, opts = {}) {
+  const r = await fetch(url, { ...opts, headers: { ...cab, ...(opts.headers || {}) } });
+  if (!r.ok) { const e = new Error('GitHub ' + r.status); e.status = r.status; throw e; }
+  return r.status === 204 ? null : r.json();
+}
+function cabeceras(token, extra = {}) {
+  return { Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', ...extra };
+}
+
+function abrirDialogoToken(aviso) {
+  const av = document.getElementById('tokAviso');
+  av.textContent = aviso || ''; av.hidden = !aviso;
+  document.getElementById('tokInput').value = '';
+  document.getElementById('tokError').textContent = '';
+  document.getElementById('dlgToken').showModal();
+}
+
+async function guardarYBuscar() {
+  const t = document.getElementById('tokInput').value.trim();
+  const err = document.getElementById('tokError');
+  if (!/^(github_pat_|ghp_)[A-Za-z0-9_]+$/.test(t)) { err.textContent = 'Ese código no parece de GitHub. Debe empezar por github_pat_'; return; }
+  try {
+    await gh(`${API}/repos/${REPO}/actions/workflows/${WORKFLOW}`, cabeceras(t));
+  } catch (e) {
+    err.textContent = 'GitHub no acepta ese código. Comprueba que es para planes-murcia y con permiso Actions: Read and write.';
+    return;
+  }
+  guardarToken(t);
+  mostrarAdmin();
+  document.getElementById('dlgToken').close();
+  buscarAhora();
+}
+
+async function buscarAhora() {
+  if (buscando) return;
+  const token = leerToken();
+  if (!token) { abrirDialogoToken(); return; }
+  if (!confirm('¿Actualizar los planes?\n\nTarda entre 2 y 4 minutos y gasta unos 1–2 $ de tu saldo de API.')) return;
+  buscando = true;
+  const btn = document.getElementById('btnActualizar');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span><span>Actualizando</span>';
+  const t0 = Date.now();
+  let fase = 'Lanzando la búsqueda…';
+  const tick = setInterval(() => {
+    const seg = Math.floor((Date.now() - t0) / 1000);
+    setStatus(`${fase} <strong>${Math.floor(seg / 60)}:${String(seg % 60).padStart(2, '0')}</strong> · suele tardar 2-4 minutos`, 'active');
+    setProg(Math.min(90, 5 + (seg / 200) * 85));
+  }, 1000);
+  const comprobarTope = () => { if (Date.now() - t0 > TOPE_MS) { const e = new Error('tope'); e.tope = true; throw e; } };
+  try {
+    const cab = cabeceras(token);
+    const base = `${API}/repos/${REPO}/actions/workflows/${WORKFLOW}`;
+    const listar = async () => (await gh(base + '/runs?event=workflow_dispatch&per_page=10', cab)).workflow_runs || [];
+    const previas = new Set((await listar()).map(x => x.id));
+    await gh(base + '/dispatches', cab, { method: 'POST', body: JSON.stringify({ ref: 'main' }) });
+    fase = 'Esperando a que arranque…';
+    let run = null;
+    while (!run) { await esperar(POLL_MS); comprobarTope(); run = (await listar()).find(x => !previas.has(x.id)) || null; }
+    fase = 'Buscando planes nuevos…';
+    while (run.status !== 'completed') { await esperar(POLL_MS); comprobarTope(); run = await gh(`${API}/repos/${REPO}/actions/runs/${run.id}`, cab); }
+    if (run.conclusion !== 'success') { const e = new Error('fallo'); e.run = run; throw e; }
+    fase = 'Recogiendo los planes…';
+    const datos = await gh(`${API}/repos/${REPO}/contents/docs/planes.json?ref=main`, cabeceras(token, { Accept: 'application/vnd.github.raw+json' }));
+    clearInterval(tick);
+    aplicarDatos(datos);
+  } catch (e) {
+    clearInterval(tick);
+    if (e.status === 401 || e.status === 403 || e.status === 404) {
+      borrarToken();
+      setStatus('El permiso de GitHub no vale o ha caducado.', 'error');
+      abrirDialogoToken('El permiso de GitHub no vale o ha caducado. Crea uno nuevo.');
+    } else if (e.run) {
+      setStatus(`La búsqueda terminó con error. Se conservan los planes anteriores. <a class="link-info" href="${esc(e.run.html_url)}" target="_blank" rel="noopener noreferrer">Ver qué pasó</a>`, 'error');
+    } else if (e.tope) {
+      setStatus('Está tardando más de lo normal. Mira GitHub para ver si ha terminado y recarga la página.', 'error');
+    } else {
+      setStatus('No se pudo conectar con GitHub. Revisa tu conexión e inténtalo de nuevo.', 'error');
+    }
+  } finally {
+    clearInterval(tick);
+    buscando = false;
+    setProg(0);
+    btn.disabled = false;
+    btn.innerHTML = '<svg class="i" aria-hidden="true"><use href="#i-search"/></svg><span>Actualizar planes</span>';
+  }
+}
 cargar();
+
+// El control de actualizar solo aparece en tu navegador: con el permiso guardado, o abriendo la web con #admin
+function mostrarAdmin() { document.getElementById('pieAdmin').hidden = !(leerToken() || location.hash === '#admin'); }
+window.addEventListener('hashchange', mostrarAdmin);
+mostrarAdmin();
 </script>
 </body>
 </html>
