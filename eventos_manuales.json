@@ -1,0 +1,75 @@
+[
+ {
+  "_ayuda": "Eventos que apuntas tú a mano. Misma estructura que los demás. Se quedan hasta que pasa su fecha y no se tocan en las búsquedas."
+ },
+ {
+  "nombre": "Las maravillas de Oriente (Titeremurcia)",
+  "fechaISO": "2026-11-08",
+  "hora": "13:00",
+  "tipo": "Teatro/Musical",
+  "lugar": "Plaza Julián Romea",
+  "municipio": "Murcia capital",
+  "precio": "Gratis",
+  "urlInfo": "https://www.titeremurcia.com/",
+  "descripcion": "Función de calle del festival de títeres. La fuente no indica la edad recomendada."
+ },
+ {
+  "nombre": "Punta, de El ball de Sant Vito (Titeremurcia)",
+  "fechaISO": "2026-11-08",
+  "hora": "18:00",
+  "tipo": "Teatro/Musical",
+  "lugar": "Auditorio Municipal de Cabezo de Torres",
+  "municipio": "Murcia capital",
+  "precio": "5€",
+  "urlInfo": "https://www.titeremurcia.com/",
+  "descripcion": "Función del festival de títeres. La fuente no indica la edad recomendada."
+ },
+ {
+  "nombre": "Taller de creación de títeres de guante (Titeremurcia)",
+  "fechaISO": "2026-11-12",
+  "hora": "17:00",
+  "tipo": "Taller",
+  "lugar": "Centro Cultural de Cobatillas",
+  "municipio": "Murcia capital",
+  "precio": "Gratis",
+  "urlInfo": "https://www.titeremurcia.com/",
+  "descripcion": "Taller del festival de títeres. La fuente no indica la edad recomendada."
+ },
+ {
+  "nombre": "Ratós, el tejido del tiempo (Titeremurcia)",
+  "fechaISO": "2026-11-13",
+  "hora": "18:30",
+  "tipo": "Teatro/Musical",
+  "lugar": "Centro Municipal de Jerónimo y Avileses",
+  "municipio": "Murcia capital",
+  "precio": "Gratis",
+  "urlInfo": "https://www.titeremurcia.com/",
+  "descripcion": "Función de El Baúl de la Fantasía dentro del festival de títeres."
+ },
+ {
+  "nombre": "Plenilunio, para bebés (Titeremurcia)",
+  "fechaISO": "2026-11-14",
+  "hora": "17:30 y 18:30",
+  "tipo": "Teatro/Musical",
+  "lugar": "Salón de Plenos del Ayuntamiento",
+  "municipio": "Los Alcázares",
+  "precio": "Consultar",
+  "urlInfo": "https://www.titeremurcia.com/",
+  "edadMin": 0,
+  "edadMax": 99,
+  "edadConfirmada": true,
+  "edadTexto": "Pensada para bebés",
+  "descripcion": "Función pensada para bebés según la web del festival. Precio no confirmado."
+ },
+ {
+  "nombre": "Beee! (Titeremurcia)",
+  "fechaISO": "2026-11-15",
+  "hora": "12:00",
+  "tipo": "Teatro/Musical",
+  "lugar": "Teatro Geli Albaladejo",
+  "municipio": "San Pedro del Pinatar",
+  "precio": "3€",
+  "urlInfo": "https://www.titeremurcia.com/",
+  "descripcion": "Títeres y actores, de la compañía DeLiRi. Entradas en la web del municipio y en la del festival."
+ }
+]
