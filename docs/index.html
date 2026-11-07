@@ -98,6 +98,7 @@ input, select { caret-color: var(--accent); }
   transition: background-color .18s, border-color .18s, filter .18s, transform .12s;
 }
 .btn:active { transform: scale(.98); }
+a.btn { text-decoration: none; }
 .btn-primary { background: var(--accent); color: var(--on-accent); }
 .btn-primary:hover { filter: brightness(1.07); }
 .btn-primary:disabled { background: var(--surface2); color: var(--muted); cursor: not-allowed; filter: none; transform: none; }
@@ -300,6 +301,7 @@ tbody tr:last-child td { border-bottom: 0; }
       </div>
     </div>
     <div class="actions">
+      <a class="btn btn-primary" id="btnBuscar" href="https://github.com/campoch/planes-murcia/actions/workflows/semanal.yml" target="_blank" rel="noopener noreferrer" title="Abre GitHub: pulsa Run workflow para buscar planes nuevos" aria-label="Buscar planes nuevos (abre GitHub)"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg><span>Buscar</span></a>
       <button type="button" class="btn btn-quiet" id="btnExcel" onclick="exportarExcel()" disabled aria-label="Exportar a Excel">
         <svg class="i" aria-hidden="true"><use href="#i-download"/></svg><span class="lbl">Excel</span>
       </button>
