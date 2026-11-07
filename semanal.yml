@@ -1,0 +1,31 @@
+name: Buscar planes
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"   # cada lunes a las 06:00 UTC (07:00 u 08:00 en Murcia)
+  workflow_dispatch:       # permite lanzarlo a mano desde la pestaña Actions
+
+permissions:
+  contents: write
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Buscar planes
+        run: python buscar_planes.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - name: Guardar resultados
+        run: |
+          git config user.name "planes-bot"
+          git config user.email "planes-bot@users.noreply.github.com"
+          git add docs/planes.json
+          git diff --staged --quiet || git commit -m "Planes actualizados $(date +%F)"
+          git push

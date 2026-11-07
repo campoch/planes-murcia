@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Planes Murcia · Agenda Familiar</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #FAF6EF;
+  --surface: #FFFFFF;
+  --surface2: #F3EDE3;
+  --border: #E4DACB;
+  --border-strong: #C9BBA6;
+  --text: #221C15;
+  --muted: #645B4E;
+  --accent: #C2410C;
+  --on-accent: #FFFFFF;
+  --green: #166534;
+  --amber: #92400E;
+  --focus: #1D4ED8;
+  --shadow: 0 1px 2px rgba(34,28,21,.06), 0 4px 14px rgba(34,28,21,.05);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14110E;
+    --surface: #1D1915;
+    --surface2: #27221C;
+    --border: #38312A;
+    --border-strong: #51483D;
+    --text: #F3ECE1;
+    --muted: #A99E8E;
+    --accent: #F59E6B;
+    --on-accent: #1A1008;
+    --green: #6FD08C;
+    --amber: #E7B25C;
+    --focus: #8AB4FF;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+    --bg: #14110E;
+    --surface: #1D1915;
+    --surface2: #27221C;
+    --border: #38312A;
+    --border-strong: #51483D;
+    --text: #F3ECE1;
+    --muted: #A99E8E;
+    --accent: #F59E6B;
+    --on-accent: #1A1008;
+    --green: #6FD08C;
+    --amber: #E7B25C;
+    --focus: #8AB4FF;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.3);
+}
+:root[data-theme="light"] { color-scheme: light; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+html { -webkit-text-size-adjust: 100%; accent-color: var(--accent); }
+body {
+  background: var(--bg); color: var(--text);
+  font: 400 15px/1.45 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  min-height: 100vh; -webkit-font-smoothing: antialiased;
+}
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+input, select { caret-color: var(--accent); }
+::selection { background: var(--accent); color: var(--on-accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+
+.tnum { font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.small { font-size: 12.5px; }
+.strong { font-weight: 600; }
+
+.i { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.i-sm { width: 14px; height: 14px; }
+.i-lg { width: 34px; height: 34px; stroke-width: 1.5; }
+
+/* APP BAR */
+.app-bar {
+  position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--border);
+  padding: calc(10px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right)) 10px max(16px, env(safe-area-inset-left));
+}
+.app-bar-in { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.mark { width: 34px; height: 34px; border-radius: 9px; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; flex-shrink: 0; }
+.brand h1 { white-space: nowrap; font-size: 1.1rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.01em; }
+.brand p { font-size: 12px; color: var(--muted); }
+.actions { display: flex; gap: 8px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid transparent;
+  font-weight: 600; font-size: 14px; white-space: nowrap;
+  transition: background-color .18s, border-color .18s, filter .18s, transform .12s;
+}
+.btn:active { transform: scale(.98); }
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { filter: brightness(1.07); }
+.btn-primary:disabled { background: var(--surface2); color: var(--muted); cursor: not-allowed; filter: none; transform: none; }
+.btn-quiet { background: var(--surface); border-color: var(--border-strong); color: var(--text); }
+.btn-quiet:hover { background: var(--surface2); }
+.btn-quiet:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+/* MAIN */
+.main {
+  max-width: 1200px; margin: 0 auto;
+  padding: 14px max(16px, env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left));
+}
+
+/* TOOLBAR (móvil) */
+.toolbar { display: flex; margin-bottom: 10px; }
+#btnFiltros { flex: 1; justify-content: space-between; }
+.btn-l { display: inline-flex; align-items: center; gap: 8px; }
+.count { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; background: var(--accent); color: var(--on-accent); font-size: 12px; font-weight: 700; display: inline-grid; place-items: center; }
+.count[hidden] { display: none; }
+#btnFiltros .chev { transition: transform .2s; }
+#btnFiltros[aria-expanded="true"] .chev { transform: rotate(180deg); }
+
+/* FILTROS */
+.filters-panel { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 12px; }
+.filters-panel.open { display: block; }
+.filters-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.filter-group { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.filter-label { font-size: 12px; font-weight: 600; color: var(--muted); }
+.field {
+  width: 100%; min-height: 44px; padding: 0 12px; border-radius: 10px;
+  border: 1px solid var(--border-strong); background: var(--bg); color: var(--text); font-size: 16px;
+}
+.field::placeholder { color: var(--muted); opacity: 1; }
+.panel-foot { display: flex; justify-content: flex-end; margin-top: 12px; }
+
+/* CHIPS */
+.chips-row {
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+  margin: 0 -16px 12px; padding: 2px 16px;
+}
+.chips-row::-webkit-scrollbar { display: none; }
+.chip {
+  flex-shrink: 0; min-height: 40px; padding: 0 14px; border-radius: 999px;
+  border: 1px solid var(--border-strong); background: var(--surface); color: var(--text);
+  font-size: 14px; font-weight: 500; transition: background-color .15s, color .15s, border-color .15s;
+}
+.chip.on { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+/* STATUS + LOG */
+.status { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; font-size: 14px; color: var(--muted); }
+.status strong { color: var(--text); font-weight: 600; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-strong); flex-shrink: 0; }
+.dot.active { background: var(--accent); animation: blink 1s infinite; }
+.dot.done { background: var(--green); }
+.dot.error { background: var(--accent); }
+@keyframes blink { 50% { opacity: .25; } }
+.prog-track { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; display: none; min-width: 60px; }
+.prog-track.on { display: block; }
+.prog-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width .5s ease; width: 0; }
+
+.log-box { display: none; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; font: 12px/1.8 ui-monospace, 'SF Mono', Menlo, monospace; max-height: 110px; overflow-y: auto; color: var(--muted); }
+.log-box.on { display: block; }
+.log-line { animation: fadeUp .2s ease forwards; opacity: 0; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+.log-ts { opacity: .7; margin-right: 6px; }
+.log-ok { color: var(--green); }
+.log-warn { color: var(--amber); }
+
+/* RESULTADOS */
+.results-header { align-items: center; justify-content: space-between; gap: 10px; margin: 4px 0 12px; }
+.results-title { font-size: 15px; font-weight: 600; }
+.results-title span { color: var(--accent); }
+.view-toggle { display: none; border: 1px solid var(--border-strong); border-radius: 10px; overflow: hidden; background: var(--surface); }
+.view-btn { min-width: 42px; min-height: 38px; display: grid; place-items: center; border: 0; background: transparent; color: var(--muted); }
+.view-btn[aria-pressed="true"] { background: var(--surface2); color: var(--text); }
+
+/* TABLA (escritorio) */
+.table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; min-width: 1020px; }
+td:nth-child(3), td:nth-child(6) { min-width: 140px; }
+td:nth-child(4) { white-space: nowrap; }
+th { text-align: left; background: var(--surface2); border-bottom: 1px solid var(--border); }
+.th-btn, .th-plain { display: inline-flex; align-items: center; gap: 4px; width: 100%; padding: 10px 14px; font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; text-align: left; }
+.th-btn { background: none; border: 0; }
+.th-btn:hover, .th-btn.sorted { color: var(--text); }
+td { padding: 12px 14px; vertical-align: top; border-bottom: 1px solid var(--border); font-size: 14px; }
+tbody tr:last-child td { border-bottom: 0; }
+@media (hover: hover) { tbody tr:hover { background: var(--surface2); } }
+.num { color: var(--muted); font-size: 12.5px; font-weight: 600; }
+.plan-name { display: block; font-weight: 600; }
+.plan-desc { display: block; margin-top: 2px; font-size: 12.5px; color: var(--muted); line-height: 1.35; }
+.tipo { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+
+/* BADGES */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px;
+  font-size: 12px; font-weight: 600; line-height: 1.5; white-space: nowrap; color: var(--muted);
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+}
+.b-gratis, .b-hecho { color: var(--green); }
+.b-finde { color: var(--accent); }
+.b-comprado { color: var(--amber); }
+.b-pago { color: var(--text); }
+
+.topic-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.t-musica { background: #E0568A; } .t-teatro { background: #9B59B6; } .t-mercado { background: #D99A1E; }
+.t-naturaleza { background: #4C9F5B; } .t-parque { background: #3B8FD9; } .t-festival { background: #E9693F; }
+.t-taller { background: #1FA7B8; } .t-zoo { background: #7FAE3A; } .t-cultura { background: #C94B7B; }
+.t-magia { background: #7352C7; } .t-deporte { background: #A3A82A; } .t-gastro { background: #E08A63; }
+.t-default { background: #8A8378; }
+
+/* TARJETAS (móvil) */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; }
+.plan-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow); }
+@media (hover: hover) { .plan-card:hover { border-color: var(--border-strong); } }
+.card-title { font-size: 16px; font-weight: 600; line-height: 1.3; }
+.card-when { font-size: 14px; font-weight: 500; }
+.card-where { display: flex; gap: 6px; align-items: flex-start; color: var(--muted); font-size: 14px; }
+.card-where .i { margin-top: 2px; }
+.card-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.card-desc { font-size: 14px; color: var(--muted); }
+.link-info + .link-info { margin-left: 16px; }
+.link-info { display: inline-flex; align-items: center; min-height: 32px; font-size: 13px; font-weight: 600; color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+@media (pointer: coarse) { .link-info { min-height: 44px; } }
+.card-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border); }
+
+.btn-ticket {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px; margin-top: 6px;
+  border-radius: 9px; font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap;
+  background: var(--accent); color: var(--on-accent); border: 1px solid transparent;
+}
+.btn-ticket.alt { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.card-foot .btn-ticket { margin-top: 0; }
+@media (pointer: coarse) { .btn-ticket { min-height: 44px; padding: 0 16px; font-size: 14px; } }
+
+/* ESTADOS */
+.state { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 56px 20px; color: var(--muted); }
+.state h2 { font-size: 1.2rem; font-weight: 600; color: var(--text); }
+.state p { max-width: 44ch; }
+.state .btn { margin-top: 8px; }
+
+.sk-card { gap: 12px; }
+.sk { display: block; height: 12px; border-radius: 6px; background: linear-gradient(90deg, var(--surface2) 25%, var(--border) 50%, var(--surface2) 75%); background-size: 200% 100%; animation: shimmer 1.3s linear infinite; }
+.sk-t { height: 18px; width: 70%; } .sk-l { width: 90%; } .sk-l.short { width: 55%; } .sk-b { height: 36px; width: 45%; margin-top: 6px; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+.spinner { width: 14px; height: 14px; border: 2px solid color-mix(in srgb, currentColor 25%, transparent); border-top-color: currentColor; border-radius: 50%; animation: spin .7s linear infinite; display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* RESPONSIVE */
+@media (max-width: 520px) {
+  .brand p { display: none; }
+  #btnExcel .lbl { display: none; }
+  #btnExcel { padding: 0; min-width: 44px; }
+}
+@media (min-width: 701px) { .view-toggle { display: flex; } }
+@media (min-width: 900px) {
+  .toolbar { display: none; }
+  .filters-panel { display: block; }
+  .filters-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .panel-foot { display: none; }
+  .field { min-height: 40px; font-size: 14px; }
+  .chips-row { flex-wrap: wrap; overflow: visible; margin: 0 0 14px; padding: 2px 0; }
+  .chip { min-height: 34px; }
+  .main { padding-top: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v10m0 0-4-4m4 4 4-4M5 19h14"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h8M18 7h2M4 17h2M12 17h8"/><circle cx="15" cy="7" r="2.5"/><circle cx="9" cy="17" r="2.5"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 9V7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2a3 3 0 0 0 0 6v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2a3 3 0 0 0 0-6z"/><path d="M14 7v2m0 3v.01m0 3v2"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.2-6-10a6 6 0 1 1 12 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5m0 3.5v.01"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14m0 0-6-6m6 6 6-6"/></symbol>
+  </defs>
+</svg>
+
+<header class="app-bar">
+  <div class="app-bar-in">
+    <div class="brand">
+      <span class="mark"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+      <div>
+        <h1>Planes Murcia</h1>
+        <p>Agenda familiar · niños de 1 a 4 años</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn btn-quiet" id="btnExcel" onclick="exportarExcel()" disabled aria-label="Exportar a Excel">
+        <svg class="i" aria-hidden="true"><use href="#i-download"/></svg><span class="lbl">Excel</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="toolbar">
+    <button type="button" class="btn btn-quiet" id="btnFiltros" aria-expanded="false" aria-controls="filtersPanel" onclick="toggleFiltros()">
+      <span class="btn-l"><svg class="i" aria-hidden="true"><use href="#i-sliders"/></svg>Filtros<span class="count" id="filtrosCount" hidden>0</span></span>
+      <svg class="i chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+    </button>
+  </div>
+
+  <section class="filters-panel" id="filtersPanel" aria-label="Filtros">
+    <div class="filters-grid">
+      <div class="filter-group">
+        <label class="filter-label" for="fDesde">Desde</label>
+        <input class="field" type="date" id="fDesde" onchange="aplicarFiltros()" />
+      </div>
+      <div class="filter-group">
+        <label class="filter-label" for="fHasta">Hasta</label>
+        <input class="field" type="date" id="fHasta" onchange="aplicarFiltros()" />
+      </div>
+      <div class="filter-group">
+        <label class="filter-label" for="fLocalidad">Localidad</label>
+        <select class="field" id="fLocalidad" onchange="aplicarFiltros()">
+          <option value="">Toda la Región</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label" for="fTema">Temática</label>
+        <select class="field" id="fTema" onchange="aplicarFiltros()">
+          <option value="">Todas</option>
+          <option value="musica">Música / Concierto</option>
+          <option value="teatro">Teatro / Musical</option>
+          <option value="mercado">Mercadillo / Mercado</option>
+          <option value="naturaleza">Naturaleza / Granja</option>
+          <option value="parque">Parque / Infantil</option>
+          <option value="festival">Festival</option>
+          <option value="taller">Taller</option>
+          <option value="zoo">Zoo / Animales</option>
+          <option value="cultura">Cultura / Museo</option>
+          <option value="magia">Magia / Circo</option>
+          <option value="deporte">Deporte</option>
+          <option value="gastronomia">Gastronomía</option>
+          <option value="exposicion">Exposición</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label" for="fEdad">Edad mínima</label>
+        <select class="field" id="fEdad" onchange="aplicarFiltros()">
+          <option value="">Cualquier edad</option>
+          <option value="0">Desde bebés</option>
+          <option value="1">1 año o más</option>
+          <option value="2">2 años o más</option>
+          <option value="3">3 años o más</option>
+          <option value="4">4 años o más</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label" for="fPrecio">Precio</label>
+        <select class="field" id="fPrecio" onchange="aplicarFiltros()">
+          <option value="">Todos</option>
+          <option value="gratis">Solo gratis</option>
+          <option value="pago">Solo de pago</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label" for="fFecha">Tipo de plan</label>
+        <select class="field" id="fFecha" onchange="aplicarFiltros()">
+          <option value="">Todos</option>
+          <option value="evento">Eventos con fecha</option>
+          <option value="permanente">Permanentes</option>
+          <option value="finde">Solo fin de semana</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label" for="fTexto">Buscar por nombre</label>
+        <input class="field" id="fTexto" type="search" placeholder="Nombre o lugar" autocomplete="off" oninput="aplicarFiltros()" />
+      </div>
+    </div>
+    <div class="panel-foot">
+      <button type="button" class="btn btn-quiet" onclick="limpiarFiltros()">Restablecer filtros</button>
+    </div>
+  </section>
+
+  <div class="chips-row" role="group" aria-label="Filtros rápidos">
+    <button type="button" class="chip" id="chip-finde" aria-pressed="false" onclick="toggleChip('finde','on',this)">Este finde</button>
+    <button type="button" class="chip" id="chip-gratis" aria-pressed="false" onclick="toggleChip('gratis','on',this)">Gratis</button>
+    <button type="button" class="chip" id="chip-bebes" aria-pressed="false" onclick="toggleChip('bebes','on',this)">Bebés</button>
+    <button type="button" class="chip" id="chip-mercado" aria-pressed="false" onclick="toggleChip('mercado','on',this)">Mercadillos</button>
+    <button type="button" class="chip" id="chip-musica" aria-pressed="false" onclick="toggleChip('musica','on',this)">Música</button>
+    <button type="button" class="chip" id="chip-teatro" aria-pressed="false" onclick="toggleChip('teatro','on',this)">Teatro</button>
+    <button type="button" class="chip" id="chip-naturaleza" aria-pressed="false" onclick="toggleChip('naturaleza','on',this)">Naturaleza</button>
+    <button type="button" class="chip" id="chip-magia" aria-pressed="false" onclick="toggleChip('magia','on',this)">Magia</button>
+    <button type="button" class="chip" id="chip-festival" aria-pressed="false" onclick="toggleChip('festival','on',this)">Festival</button>
+  </div>
+
+  <div class="status" id="statusBar" role="status" aria-live="polite">
+    <div class="dot" id="dot"></div>
+    <span id="statusTxt">Cargando planes…</span>
+    <div class="prog-track" id="progTrack"><div class="prog-fill" id="progFill"></div></div>
+  </div>
+  <div class="log-box" id="logBox"></div>
+
+  <div class="results-header" id="resultsHeader" style="display:none">
+    <h2 class="results-title" id="resultsTitle">Mostrando <span>0</span> planes</h2>
+    <div class="view-toggle" role="group" aria-label="Vista">
+      <button type="button" class="view-btn" id="vTable" aria-pressed="true" aria-label="Vista tabla" onclick="setView('table',this)"><svg class="i" aria-hidden="true"><use href="#i-list"/></svg></button>
+      <button type="button" class="view-btn" id="vCards" aria-pressed="false" aria-label="Vista tarjetas" onclick="setView('cards',this)"><svg class="i" aria-hidden="true"><use href="#i-grid"/></svg></button>
+    </div>
+  </div>
+
+  <div id="resultsArea">
+    <div class="state">
+      <svg class="i i-lg" aria-hidden="true"><use href="#i-calendar"/></svg>
+      <h2>Cargando planes</h2>
+      <p>Un momento.</p>
+          </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+let allPlanes = [];
+let viewMode = 'table';
+let activeChips = new Set();
+let sortCol = null, sortDir = 1;
+
+function ts() {
+  const d = new Date();
+  return [d.getHours(),d.getMinutes(),d.getSeconds()].map(n=>n.toString().padStart(2,'0')).join(':');
+}
+function log(msg, type) {
+  const box = document.getElementById('logBox');
+  box.classList.add('on');
+  const div = document.createElement('div');
+  div.className = 'log-line';
+  const cls = type==='ok' ? 'log-ok' : type==='warn' ? 'log-warn' : '';
+  div.innerHTML = `<span class="log-ts">[${ts()}]</span><span class="${cls}">${msg}</span>`;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+function setStatus(msg, state) {
+  document.getElementById('statusTxt').innerHTML = msg;
+  document.getElementById('dot').className = 'dot ' + (state||'');
+}
+function setProg(pct) {
+  const t = document.getElementById('progTrack');
+  t.classList.toggle('on', pct>0 && pct<100);
+  document.getElementById('progFill').style.width = pct + '%';
+}
+
+const tipoMap = {
+  'musica':['música','concierto','music'],'teatro':['teatro','musical','títeres','obra'],
+  'mercado':['mercadillo','mercado','feria'],'naturaleza':['naturaleza','granja','campo','senderismo'],
+  'parque':['parque','infantil','tobogán'],'festival':['festival','fest'],
+  'taller':['taller','manualidades','workshop'],'zoo':['zoo','animales','acuario','safari'],
+  'cultura':['cultura','museo','exposición','galería'],'magia':['magia','circo','payaso','malabar'],
+  'deporte':['deporte','fútbol','baloncesto','atletismo'],'gastronomia':['gastronomi','comida','chef','cocina'],
+  'exposicion':['exposición','expo','muestra']
+};
+function getTipoClass(tipo) {
+  if (!tipo) return 't-default';
+  const t = tipo.toLowerCase();
+  if (t.includes('música')||t.includes('concierto')) return 't-musica';
+  if (t.includes('teatro')||t.includes('musical')) return 't-teatro';
+  if (t.includes('mercad')) return 't-mercado';
+  if (t.includes('natural')||t.includes('granja')) return 't-naturaleza';
+  if (t.includes('parque')||t.includes('infantil')) return 't-parque';
+  if (t.includes('festival')) return 't-festival';
+  if (t.includes('taller')) return 't-taller';
+  if (t.includes('zoo')||t.includes('animal')||t.includes('acuario')) return 't-zoo';
+  if (t.includes('cultura')||t.includes('museo')) return 't-cultura';
+  if (t.includes('magia')||t.includes('circo')) return 't-magia';
+  if (t.includes('deporte')) return 't-deporte';
+  if (t.includes('gastron')) return 't-gastro';
+  return 't-default';
+}
+// FILTERS
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ico = (n, cls = '') => `<svg class="i ${cls}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const mqMobile = window.matchMedia('(max-width: 700px)');
+function vistaActual() { return mqMobile.matches ? 'cards' : viewMode; }
+
+function contarFiltros() {
+  let n = 0;
+  ['fLocalidad','fTema','fEdad','fPrecio','fFecha'].forEach(id => { if (document.getElementById(id).value) n++; });
+  if (document.getElementById('fTexto').value.trim()) n++;
+  n += activeChips.size;
+  const el = document.getElementById('filtrosCount');
+  el.textContent = n;
+  el.hidden = n === 0;
+}
+
+function aplicarFiltros() {
+  contarFiltros();
+  if (!allPlanes.length) return;
+  renderResults(getFiltered());
+}
+
+function toggleChip(id, cls, el) {
+  if (activeChips.has(id)) {
+    activeChips.delete(id);
+    el.className = 'chip';
+    el.setAttribute('aria-pressed', 'false');
+  } else {
+    activeChips.add(id);
+    el.className = 'chip on';
+    el.setAttribute('aria-pressed', 'true');
+  }
+  aplicarFiltros();
+}
+
+function limpiarFiltros() {
+  ['fLocalidad','fTema','fEdad','fPrecio','fFecha'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('fTexto').value = '';
+  setRangoDefecto();
+  activeChips.clear();
+  document.querySelectorAll('.chip').forEach(c => { c.className = 'chip'; c.setAttribute('aria-pressed', 'false'); });
+  aplicarFiltros();
+}
+
+function toggleFiltros() {
+  const open = document.getElementById('filtersPanel').classList.toggle('open');
+  document.getElementById('btnFiltros').setAttribute('aria-expanded', String(open));
+}
+
+// VISTAS Y ESTADOS
+function setView(mode) {
+  viewMode = mode;
+  document.getElementById('vTable').setAttribute('aria-pressed', String(mode === 'table'));
+  document.getElementById('vCards').setAttribute('aria-pressed', String(mode === 'cards'));
+  if (allPlanes.length) aplicarFiltros();
+}
+
+function showState(icon, title, text, btnLabel, btnFn) {
+  document.getElementById('resultsArea').innerHTML =
+    `<div class="state">${ico(icon, 'i-lg')}<h2>${esc(title)}</h2><p>${esc(text)}</p>` +
+    (btnLabel ? `<button type="button" class="btn btn-primary" onclick="${btnFn}">${esc(btnLabel)}</button>` : '') + `</div>`;
+}
+
+function showSkeleton() {
+  const card = '<div class="plan-card sk-card"><span class="sk sk-t"></span><span class="sk sk-l"></span><span class="sk sk-l short"></span><span class="sk sk-b"></span></div>';
+  document.getElementById('resultsArea').innerHTML = '<div class="card-grid" aria-hidden="true">' + card.repeat(6) + '</div>';
+}
+
+function renderResults(planes) {
+  const area = document.getElementById('resultsArea');
+  const title = document.getElementById('resultsTitle');
+  if (title) title.innerHTML = `Mostrando <span>${planes.length}</span> de ${allPlanes.length} planes`;
+  if (!planes.length) {
+    showState('search', 'Ningún plan con estos filtros', 'Prueba con otro rango de fechas o quita algún filtro.', 'Quitar filtros', 'limpiarFiltros()');
+    return;
+  }
+  vistaActual() === 'cards' ? renderCards(planes, area) : renderTable(planes, area);
+}
+
+function badgePrecio(p) {
+  return esGratis(p)
+    ? `<span class="badge b-gratis">${esc(p.precio)}</span>`
+    : `<span class="badge b-pago">${esc(p.precio || 'Consultar')}</span>`;
+}
+function badgeFecha(p) {
+  return p.esPermanente ? '<span class="badge">Permanente</span>'
+    : p.esFinde ? '<span class="badge b-finde">Fin de semana</span>'
+    : '<span class="badge">Evento</span>';
+}
+function badgeEstado(p) {
+  if (p.estado === 'Hecho') return `<span class="badge b-hecho">${ico('check','i-sm')}Hecho</span>`;
+  if (p.estado === 'Comprado' || p.estado === 'Compradas') return '<span class="badge b-comprado">Comprado</span>';
+  return '<span class="badge">Pendiente</span>';
+}
+function edadStr(p) {
+  if (p.edadMin === 0 && p.edadMax >= 99) return 'Todas las edades';
+  if (p.edadMax >= 99) return `${p.edadMin}+ años`;
+  return `${p.edadMin}–${p.edadMax} años`;
+}
+function tipoTag(p) {
+  return `<span class="tipo"><span class="topic-dot ${getTipoClass(p.tipo)}"></span>${esc(p.tipo || '–')}</span>`;
+}
+
+function renderTable(planes, area) {
+  const th = (col, label) => `<th scope="col"><button type="button" class="th-btn${sortCol === col ? ' sorted' : ''}" onclick="sortBy('${col}')">${label}${sortCol === col ? ico(sortDir === 1 ? 'up' : 'down', 'i-sm') : ''}</button></th>`;
+  const plain = label => `<th scope="col"><span class="th-plain">${label}</span></th>`;
+  const rows = planes.map((p, i) => `<tr>
+    <td class="num tnum">${i + 1}</td>
+    <td><span class="plan-name">${esc(p.nombre)}</span><span class="plan-desc">${esc(p.descripcion || '')}</span><div>${infoLink(p)}</div></td>
+    <td class="tnum">${esc(p.fecha || '–')}<br>${badgeFecha(p)}</td>
+    <td class="tnum muted">${esc(p.hora || '–')}</td>
+    <td>${tipoTag(p)}</td>
+    <td><span class="strong">${esc(p.lugar || '–')}</span><br><span class="muted small">${esc(p.municipio || '')}</span></td>
+    <td>${badgePrecio(p)}<div>${ticketLink(p)}</div></td>
+    <td class="muted small">${edadStr(p)}</td>
+    <td>${badgeEstado(p)}</td>
+  </tr>`).join('');
+  area.innerHTML = `<div class="table-wrap"><table><thead><tr>
+    ${plain('#')}${th('nombre','Plan')}${th('fecha','Fecha')}${plain('Hora')}${th('tipo','Tipo')}${th('municipio','Lugar')}${th('precio','Precio y entradas')}${plain('Edad')}${plain('Estado')}
+  </tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+function renderCards(planes, area) {
+  const cards = planes.map(p => {
+    const cuando = [p.fecha, p.hora && p.hora !== 'Libre' ? p.hora : ''].filter(Boolean).join(' · ');
+    const donde = [p.lugar, p.municipio].filter(Boolean).join(' · ');
+    return `<article class="plan-card">
+      <h3 class="card-title">${esc(p.nombre)}</h3>
+      <p class="card-when tnum">${esc(cuando || '–')}</p>
+      <p class="card-where">${ico('pin','i-sm')}<span>${esc(donde || '–')}</span></p>
+      <div class="card-meta">${badgePrecio(p)}${badgeFecha(p)}<span class="badge">${edadStr(p)}</span>${tipoTag(p)}</div>
+      ${p.descripcion ? `<p class="card-desc">${esc(p.descripcion)}</p>` : ''}
+      ${infoLink(p) ? `<p>${infoLink(p)}</p>` : ''}
+      <div class="card-foot">${ticketLink(p) || '<span></span>'}${badgeEstado(p)}</div>
+    </article>`;
+  }).join('');
+  area.innerHTML = `<div class="card-grid">${cards}</div>`;
+}
+
+function sortBy(col) {
+  sortDir = sortCol===col ? sortDir*-1 : 1;
+  sortCol = col;
+  const pl = getFiltered();
+  pl.sort((a,b) => {
+    const va=(a[col]||'').toString().toLowerCase(), vb=(b[col]||'').toString().toLowerCase();
+    return va<vb?-sortDir:va>vb?sortDir:0;
+  });
+  renderTable(pl, document.getElementById('resultsArea'));
+}
+
+function getFiltered() {
+  let pl = [...allPlanes];
+  const fLoc = document.getElementById('fLocalidad').value;
+  const fTema = document.getElementById('fTema').value;
+  const fEdad = document.getElementById('fEdad').value;
+  const fPrecio = document.getElementById('fPrecio').value;
+  const fFecha = document.getElementById('fFecha').value;
+  const fTxt = document.getElementById('fTexto').value.toLowerCase();
+  if (fLoc) pl = pl.filter(p => p.municipio === fLoc);
+  if (fTema && tipoMap[fTema]) { const w=tipoMap[fTema]; pl=pl.filter(p=>p.tipo&&w.some(x=>p.tipo.toLowerCase().includes(x))); }
+  if (fEdad!=='') pl=pl.filter(p=>p.edadMin<=parseInt(fEdad)+1);
+  if (fPrecio==='gratis') pl=pl.filter(p=>p.precio&&p.precio.toLowerCase().includes('grat'));
+  else if (fPrecio==='pago') pl=pl.filter(p=>!p.precio||!p.precio.toLowerCase().includes('grat'));
+  if (fFecha==='evento') pl=pl.filter(p=>!p.esPermanente);
+  else if (fFecha==='permanente') pl=pl.filter(p=>p.esPermanente);
+  else if (fFecha==='finde') pl=pl.filter(p=>p.esFinde);
+  if (fTxt) pl=pl.filter(p=>(p.nombre||'').toLowerCase().includes(fTxt)||(p.descripcion||'').toLowerCase().includes(fTxt)||(p.municipio||'').toLowerCase().includes(fTxt));
+  if (activeChips.has('finde')) pl=pl.filter(p=>p.esFinde);
+  if (activeChips.has('gratis')) pl=pl.filter(p=>p.precio&&p.precio.toLowerCase().includes('grat'));
+  if (activeChips.has('bebes')) pl=pl.filter(p=>p.edadMin<=1);
+  if (activeChips.has('mercado')) pl=pl.filter(p=>p.tipo&&tipoMap.mercado.some(w=>p.tipo.toLowerCase().includes(w)));
+  if (activeChips.has('musica')) pl=pl.filter(p=>p.tipo&&tipoMap.musica.some(w=>p.tipo.toLowerCase().includes(w)));
+  if (activeChips.has('teatro')) pl=pl.filter(p=>p.tipo&&tipoMap.teatro.some(w=>p.tipo.toLowerCase().includes(w)));
+  if (activeChips.has('naturaleza')) pl=pl.filter(p=>p.tipo&&tipoMap.naturaleza.some(w=>p.tipo.toLowerCase().includes(w)));
+  if (activeChips.has('magia')) pl=pl.filter(p=>p.tipo&&tipoMap.magia.some(w=>p.tipo.toLowerCase().includes(w)));
+  if (activeChips.has('festival')) pl=pl.filter(p=>p.tipo&&tipoMap.festival.some(w=>p.tipo.toLowerCase().includes(w)));
+  const dDesde = document.getElementById('fDesde').value;
+  const dHasta = document.getElementById('fHasta').value;
+  if (dDesde || dHasta) {
+    pl = pl.filter(p => {
+      if (p.esPermanente || !p.fechaISO) return true;
+      const fin = p.fechaFinISO || p.fechaISO;
+      if (dDesde && fin < dDesde) return false;
+      if (dHasta && p.fechaISO > dHasta) return false;
+      return true;
+    });
+  }
+  return pl;
+}
+
+function exportarExcel() {
+  if (!allPlanes.length) return;
+  const planes = getFiltered();
+  const hoy = new Date();
+  const fecha = `${hoy.getDate().toString().padStart(2,'0')}${(hoy.getMonth()+1).toString().padStart(2,'0')}${hoy.getFullYear()}`;
+  const wb = XLSX.utils.book_new();
+
+  const header = ['#','PLAN','FECHA','HORA','TIPO','LUGAR','MUNICIPIO','PRECIO','ENTRADAS','EDAD MIN','EDAD MAX','FIN DE SEMANA','PERMANENTE','DESCRIPCIÓN','ESTADO','FUENTE'];
+  const cols = [{wch:4},{wch:38},{wch:18},{wch:10},{wch:20},{wch:28},{wch:18},{wch:14},{wch:18},{wch:9},{wch:9},{wch:12},{wch:12},{wch:45},{wch:12},{wch:25}];
+  const label = p => esGratis(p) ? '' : (safeUrl(p.urlEntradas) ? 'Comprar entradas' : 'Buscar entradas');
+  const toRow = (p,i) => [
+    i+1, p.nombre||'', p.fecha||'', p.hora||'', p.tipo||'',
+    p.lugar||'', p.municipio||'', p.precio||'', label(p),
+    p.edadMin||0, p.edadMax===99?'Sin límite':p.edadMax||'',
+    p.esFinde?'SÍ':'NO', p.esPermanente?'SÍ':'NO',
+    p.descripcion||'', p.estado||'Pendiente', p.fuente||''
+  ];
+  const mk = list => {
+    const ws = XLSX.utils.aoa_to_sheet([header, ...list.map(toRow)]);
+    ws['!cols'] = cols;
+    list.forEach((p,i) => {
+      const u = entradasUrl(p);
+      const c = ws[XLSX.utils.encode_cell({r:i+1, c:8})];
+      if (u && c) c.l = { Target: u, Tooltip: 'Entradas' };
+    });
+    return ws;
+  };
+
+  XLSX.utils.book_append_sheet(wb, mk(planes), `Todos ${fecha}`);
+  const finde = planes.filter(p=>p.esFinde);
+  if (finde.length) XLSX.utils.book_append_sheet(wb, mk(finde), 'Solo Finde');
+  const gratis = planes.filter(esGratis);
+  if (gratis.length) XLSX.utils.book_append_sheet(wb, mk(gratis), 'Solo Gratis');
+  const pago = planes.filter(p=>!esGratis(p));
+  if (pago.length) XLSX.utils.book_append_sheet(wb, mk(pago), 'De pago (entradas)');
+  const mercados = planes.filter(p=>p.tipo&&p.tipo.toLowerCase().includes('mercad'));
+  if (mercados.length) XLSX.utils.book_append_sheet(wb, mk(mercados), 'Mercadillos');
+
+  XLSX.writeFile(wb, `Planes_Murcia_${fecha}.xlsx`);
+  setStatus(`Excel guardado: <strong>${planes.length} planes</strong> en ${wb.SheetNames.length} pestañas`, 'done');
+}
+
+function safeUrl(u) { try { const x = new URL(u); return (x.protocol==='https:'||x.protocol==='http:') ? x.href : ''; } catch(e) { return ''; } }
+function esGratis(p) { return !!(p.precio && p.precio.toLowerCase().includes('grat')); }
+function entradasUrl(p) {
+  if (esGratis(p)) return '';
+  return safeUrl(p.urlEntradas) || ('https://www.google.com/search?q=' + encodeURIComponent('comprar entradas ' + (p.nombre||'') + ' ' + (p.municipio||'')));
+}
+function ticketLink(p) {
+  if (esGratis(p)) return '';
+  const real = safeUrl(p.urlEntradas);
+  return `<a class="btn-ticket${real ? '' : ' alt'}" href="${esc(entradasUrl(p))}" target="_blank" rel="noopener noreferrer">${ico('ticket')}${real ? 'Comprar entradas' : 'Buscar entradas'}</a>`;
+}
+
+function infoLink(p) {
+  const a = [];
+  const u = safeUrl(p.urlInfo), m = safeUrl(p.urlMapa);
+  if (u) a.push(`<a class="link-info" href="${esc(u)}" target="_blank" rel="noopener noreferrer">Más información</a>`);
+  if (m) a.push(`<a class="link-info" href="${esc(m)}" target="_blank" rel="noopener noreferrer">Cómo llegar</a>`);
+  return a.join('');
+}
+
+function parseRango(p) {
+  const isoRe = /^\d{4}-\d{2}-\d{2}$/;
+  if (isoRe.test(p.fechaISO||'')) return [p.fechaISO, isoRe.test(p.fechaFinISO||'') ? p.fechaFinISO : p.fechaISO];
+  const f = p.fecha || '', y = new Date().getFullYear();
+  const pad = n => String(n).padStart(2,'0');
+  let m = f.match(/(\d{1,2})\s*[–-]\s*(\d{1,2})\/(\d{1,2})(?:\/(\d{4}))?/);
+  if (m) { const yy = m[4]||y; return [`${yy}-${pad(m[3])}-${pad(m[1])}`, `${yy}-${pad(m[3])}-${pad(m[2])}`]; }
+  const all = [...f.matchAll(/(\d{1,2})\/(\d{1,2})(?:\/(\d{4}))?/g)];
+  if (all.length) {
+    const toIso = a => `${a[3]||y}-${pad(a[2])}-${pad(a[1])}`;
+    return [toIso(all[0]), toIso(all[all.length-1])];
+  }
+  return ['',''];
+}
+
+function normalizarPlanes(arr) {
+  return arr.map((p,i) => {
+    const q = { ...p, id:i+1,
+      edadMin: typeof p.edadMin==='number' ? p.edadMin : 0,
+      edadMax: typeof p.edadMax==='number' ? p.edadMax : 99,
+      esFinde: Boolean(p.esFinde),
+      esPermanente: Boolean(p.esPermanente),
+      estado: p.estado || 'Pendiente',
+      urlEntradas: p.urlEntradas || ''
+    };
+    if (q.esPermanente) { q.fechaISO = ''; q.fechaFinISO = ''; }
+    else { const r = parseRango(q); q.fechaISO = r[0]; q.fechaFinISO = r[1]; }
+    return q;
+  });
+}
+
+function isoDate(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function setRangoDefecto() {
+  const h = new Date(), f = new Date(h); f.setDate(h.getDate()+10);
+  document.getElementById('fDesde').value = isoDate(h);
+  document.getElementById('fHasta').value = isoDate(f);
+}
+setRangoDefecto();
+contarFiltros();
+mqMobile.addEventListener('change', () => { if (allPlanes.length) aplicarFiltros(); });
+async function cargar() {
+  try {
+    const r = await fetch('planes.json', { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const datos = await r.json();
+    allPlanes = normalizarPlanes(datos.planes || []);
+    // Primero los eventos con fecha (por orden de fecha) y después los lugares fijos
+    allPlanes.sort((a, b) => (a.esPermanente - b.esPermanente) || (a.fechaISO || '').localeCompare(b.fechaISO || '') || a.nombre.localeCompare(b.nombre, 'es'));
+    // Localidades que hay en los datos
+    const sel = document.getElementById('fLocalidad');
+    [...new Set(allPlanes.map(p => p.municipio).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es')).forEach(m => {
+      const o = document.createElement('option'); o.textContent = m; o.value = m; sel.appendChild(o);
+    });
+    // Rango de fechas por defecto: de hoy al final de lo buscado
+    const hoy = isoDate(new Date());
+    if (datos.rango) {
+      const desde = hoy > datos.rango.desde ? hoy : datos.rango.desde;
+      document.getElementById('fDesde').value = desde;
+      document.getElementById('fHasta').value = datos.rango.hasta >= desde ? datos.rango.hasta : desde;
+    }
+    const f = new Date(datos.actualizado + 'T12:00:00');
+    const dias = Math.floor((new Date() - f) / 86400000);
+    const aviso = dias > 9 ? ` · <strong>Datos de hace ${dias} días</strong>` : '';
+    setStatus(`Actualizado el ${f.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })} · <strong>${allPlanes.length} planes</strong>${aviso}. Confirma fecha y precio antes de ir.`, dias > 9 ? 'error' : 'done');
+    document.getElementById('btnExcel').disabled = false;
+    document.getElementById('resultsHeader').style.display = 'flex';
+    aplicarFiltros();
+  } catch (e) {
+    setStatus('No se pudieron cargar los planes', 'error');
+    showState('alert', 'No se pudieron cargar los planes', 'Recarga la página. Si sigue igual, puede que la primera búsqueda aún no se haya ejecutado.', 'Reintentar', 'cargar()');
+  }
+}
+cargar();
+</script>
+</body>
+</html>
